@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 
-import { InfiniteList } from '../.';
+import { InfiniteScroll } from '../.';
 
-describe('<InfiniteList />', () => {
+describe('<InfiniteScroll />', () => {
 
-  it('renders InfiniteList correctly', () => {
+  it('renders InfiniteScroll correctly', () => {
     const tree = renderer.create(
-      <InfiniteList
+      <InfiniteScroll
         isLoading={true}
         throttle={100}
         threshold={300}
@@ -15,7 +15,7 @@ describe('<InfiniteList />', () => {
         onLoadMore={() => console.log()}
       >
         <div>Hello</div>
-      </InfiniteList>
+      </InfiniteScroll>
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });

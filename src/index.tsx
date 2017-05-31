@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const throttle = require('lodash.throttle');
 
-export interface InfiniteListProps {
+export interface InfiniteScrollProps {
   /**
    * Does the resource have more entities
    */
@@ -32,8 +32,8 @@ export interface InfiniteListProps {
   children?: any;
 }
 
-export class InfiniteList extends React.Component<InfiniteListProps, {}> {
-  public static defaultProps: Pick<InfiniteListProps, 'threshold' | 'throttle'> = {
+export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
+  public static defaultProps: Pick<InfiniteScrollProps, 'threshold' | 'throttle'> = {
     threshold: 100,
     throttle: 64,
   };
@@ -73,4 +73,4 @@ export class InfiniteList extends React.Component<InfiniteListProps, {}> {
   }
 }
 
-export default React.createFactory(InfiniteList);
+export default React.createFactory(InfiniteScroll);

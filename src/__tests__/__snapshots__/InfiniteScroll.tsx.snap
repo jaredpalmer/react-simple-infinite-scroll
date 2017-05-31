@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<InfiniteList /> renders InfiniteList correctly 1`] = `
+exports[`<InfiniteScroll /> renders InfiniteScroll correctly 1`] = `
 <div>
   <div>
     Hello

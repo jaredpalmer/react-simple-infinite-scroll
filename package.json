@@ -1,9 +1,10 @@
 {
-  "name": "react-simple-infinite-list",
-  "description": "A brutally simple react infinite list component",
+  "name": "react-simple-infinite-scroll",
+  "description": "A brutally simple React infinite scroll component",
   "version": "0.0.1",
   "license": "MIT",
-  "repository": "jaredpalmer/react-simple-infinite-list",
+  "author": "Jared Palmer <jared@palmer.net>",
+  "repository": "jaredpalmer/react-simple-infinite-scroll",
   "keywords": [
     "react",
     "infinite",

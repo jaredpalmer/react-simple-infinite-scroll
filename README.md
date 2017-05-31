@@ -1,20 +1,20 @@
-# React Simple Infinite List
+# React Simple Infinite Scroll
 
 A brutally simple infinite scroll helper component.
 
 ## Install
 
 ```bash
-npm install react-simple-infinite-list --save
+npm install react-simple-infinite-scroll --save
 ```
 
 ## Usage
 
 ```js
 import React from 'react'
-import InfiniteList from 'react-simple-infinite-list'
+import InfiniteScroll from 'react-simple-infinite-scroll'
 
-export class MyInfiniteListExample extends React.Component {
+export class MyInfiniteScrollExample extends React.Component {
   state = {
     items: [],
     isLoading: true,
@@ -47,7 +47,7 @@ export class MyInfiniteListExample extends React.Component {
   render() {
     return (
       <div>
-        <InfiniteList
+        <InfiniteScroll
           throttle={100}
           threshold={300}
           isLoading={this.state.isLoading}
@@ -56,10 +56,10 @@ export class MyInfiniteListExample extends React.Component {
         >
           {this.state.items.length > 0 
             ? this.state.items.map(item => (
-                <MyListItem key={item.id} title={item.title} />
+                <MysListItem key={item.id} title={item.title} />
               ))
             : null}
-        </InfiniteList>
+        </InfiniteScroll>
         {this.state.isLoading && (
           <MyLoadingState />
         )}

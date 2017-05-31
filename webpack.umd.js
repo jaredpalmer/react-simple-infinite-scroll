@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.join(process.cwd(), 'umd'),
-    library: 'infinite-list',
+    library: 'ReactSimpleInfiniteScroll',
     libraryTarget: 'umd',
     filename: 'index.min.js',
   },
