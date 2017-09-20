@@ -19,7 +19,7 @@ export interface InfiniteScrollProps {
   onLoadMore: () => void;
 
   /**
-   * Scroll threshold 
+   * Scroll threshold
    */
   threshold?: number;
 
@@ -41,7 +41,7 @@ export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
 
   componentDidMount() {
     window.addEventListener('scroll', throttle(this.checkWindowScroll, this.props.throttle));
-    window.removeEventListener('resize', throttle(this.checkWindowScroll, this.props.throttle));
+    window.addEventListener('resize', throttle(this.checkWindowScroll, this.props.throttle));
   }
 
   componentWillUnmount() {
