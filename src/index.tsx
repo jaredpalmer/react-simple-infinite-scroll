@@ -19,7 +19,7 @@ export interface InfiniteScrollProps {
   onLoadMore: () => void;
 
   /**
-   * Scroll threshold 
+   * Scroll threshold
    */
   threshold?: number;
 
@@ -40,13 +40,16 @@ export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
   private sentinel: HTMLDivElement;
 
   componentDidMount() {
-    window.addEventListener('scroll', throttle(this.checkWindowScroll, this.props.throttle));
-    window.removeEventListener('resize', throttle(this.checkWindowScroll, this.props.throttle));
+    this.scrollHandler = throttle(this.checkWindowScroll, this.props.throttle);
+    this.resizeHandler = throttle(this.checkWindowScroll, this.props.throttle);
+
+    window.addEventListener('scroll', this.scrollHandler);
+    window.addEventListener('resize', this.resizeHandler);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', throttle(this.checkWindowScroll, this.props.throttle));
-    window.removeEventListener('resize', throttle(this.checkWindowScroll, this.props.throttle));
+    window.removeEventListener('scroll', this.scrollHandler);
+    window.removeEventListener('resize', this.resizeHandler);
   }
 
   checkWindowScroll = () => {
