@@ -143,21 +143,21 @@ export class MyInfiniteScrollExample extends React.Component {
 
 ### throttle
 
-**[number|default:64]** Scroll handler will be execute at most once per every `wait` milliseconds.
+**[number|default:64]** Scroll handler will be executed at most once per the number of milliseconds specified.
 
 **Warning:** Making this number closer to zero can decrease performance due to a force reflow caused by `getBoundingClientRect()`, see more properties that can cause this issue in [this gist by Paul Irish](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
 
 ### render
 
-**[function|optional]** Callback used to convenient inline rendering and wrapping. Arguments passed `Object: { sentinel, children }`. Use this if you have a more complex layout where the `sentinel` needs to be injected.
+**[function|optional]** Callback used for convenient inline rendering and wrapping. Arguments passed `Object: { sentinel, children }`. Use this if you have a more complex layout where the `sentinel` needs to be injected.
 
-**Warning:** The `sentinel` must be rendered (injected in the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
+**Warning:** The `sentinel` must be rendered (injected into the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
 
 ### component
 
 **[component|optional]** React component. Similar to the `render()` prop, this component will receive `Object: { sentinel, children }` as props. **Note** that `render()` prop has precedence over this property, meaning that if both are present, `component` will not be rendered.
 
-**Warning:** The `sentinel` must be rendered (injected in the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
+**Warning:** The `sentinel` must be rendered (injected into the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
 
 ## Author
 
