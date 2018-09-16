@@ -159,6 +159,18 @@ export class MyInfiniteScrollExample extends React.Component {
 
 **Warning:** The `sentinel` must be rendered (injected in the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
 
+## Author
 
-### Author
-- Jared Palmer [@jaredpalmer](https://twitter.com/jaredpalmer)
+* Jared Palmer [@jaredpalmer](https://twitter.com/jaredpalmer)
+
+## Contributors
+
+<!-- Contributors START
+jared_palmer jaredpalmer https://twitter.com/jaredpalmer/ author contributor
+pablo_garcia pgarciacamou https://twitter.com/pgarciacamou/ contributor
+Contributors END -->
+<!-- Contributors table START -->
+| <img src="https://avatars.githubusercontent.com/jaredpalmer?s=100" width="100" alt="jared palmer" /><br />[<sub>jared palmer</sub>](https://twitter.com/jaredpalmer/)<br />💻 📖 💡 | <img src="https://avatars.githubusercontent.com/pgarciacamou?s=100" width="100" alt="pablo garcia" /><br />[<sub>pablo garcia</sub>](https://twitter.com/pgarciacamou/)<br />💻 📖 💡 |
+| :---: | :---: |
+<!-- Contributors table END -->
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
