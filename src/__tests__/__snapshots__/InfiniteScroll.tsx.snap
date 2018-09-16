@@ -8,3 +8,39 @@ exports[`<InfiniteScroll /> renders InfiniteScroll correctly 1`] = `
   <div />
 </div>
 `;
+
+exports[`<InfiniteScroll /> uses component prop correctly 1`] = `
+<table>
+  <tr>
+    <th>
+      Hello
+    </th>
+    <th>
+      World
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <div />
+    </td>
+  </tr>
+</table>
+`;
+
+exports[`<InfiniteScroll /> uses render prop correctly 1`] = `
+<table>
+  <tr>
+    <th>
+      Hello
+    </th>
+    <th>
+      World
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <div />
+    </td>
+  </tr>
+</table>
+`;
