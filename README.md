@@ -10,9 +10,11 @@ npm install react-simple-infinite-scroll --save
 
 ## Usage
 
-This component uses a "sentinel" `div` (with a React ref) that calls `getBoundingClientRect()` to measure its position and fire off a callback when it becomes visible again. Note: this package eventually becomes inefficient on very very large lists because it keeps adding nodes to the DOM. However, this package is extremely valuable for situations when a windowing technique is not possible. 
+This component uses a "sentinel" `div` (with a React ref) that calls `getBoundingClientRect()` to measure its position and fire off a callback when it becomes visible again. Note: this package eventually becomes somewhat inefficient on very very very large lists because it keeps adding nodes to the DOM. However, this package is extremely valuable for situations when a windowing technique is not possible and when a user is going to realistically scroll a few hundred rows (and _not_ thousands of rows). 
 
-For example, let's say you have a MongoDB database where you cannot efficiently return the total number of documents in a given query. All you know is if there is another page or not. This would prevent you from using `react-virtualized` because you don't know the total number of rows of your query so it cannot execute its windowing calculations. 
+### Why not use windowing (`react-virtualized`)?
+
+If you can, you probably should. However, windowing only works when you know the total number of items in the result set ahead of time. This isn't always possible. For example, let's say you have a MongoDB database where you cannot efficiently return the total number of documents in a given query. All your API returns is a cursor (so you can know is if there is another page or not). While this would prevent you from using windowing/`react-virtualized`, `react-simple-infinite-scroll` will work just fine.
 
 ### The Gist
 
