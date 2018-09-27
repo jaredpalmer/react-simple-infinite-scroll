@@ -30,6 +30,16 @@ export interface InfiniteScrollProps {
 
   /** Children */
   children?: any;
+
+  /**
+   * Callback for convenient inline rendering and wrapping
+   */
+  render?: (a: object) => any;
+
+  /**
+   * A React component to act as wrapper
+   */
+  component?: any;
 }
 
 export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
@@ -38,6 +48,8 @@ export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
     throttle: 64,
   };
   private sentinel: HTMLDivElement;
+  private scrollHandler: () => void;
+  private resizeHandler: () => void;
 
   componentDidMount() {
     this.scrollHandler = throttle(this.checkWindowScroll, this.props.throttle);
@@ -67,10 +79,28 @@ export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
   }
 
   render() {
+    const sentinel = <div ref={i => this.sentinel = i} />;
+
+    if(this.props.render) {
+      return this.props.render({
+        sentinel,
+        children: this.props.children
+      });
+    }
+
+    if(this.props.component) {
+      const Container = this.props.component;
+      return (
+        <Container sentinel={sentinel}>
+          {this.props.children}
+        </Container>
+      );
+    }
+
     return (
       <div>
         {this.props.children}
-        <div ref={i => this.sentinel = i} />
+        {sentinel}
       </div>
     );
   }
