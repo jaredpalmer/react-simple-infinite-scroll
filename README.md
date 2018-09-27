@@ -125,37 +125,43 @@ export class MyInfiniteScrollExample extends React.Component {
 
 ## Props / Options
 
-### hasMore
+### `hasMore: boolean`
 
-**[boolean|required]** Specifies if there are more entities to load.
+**Required**
 
-### isLoading
+Specifies if there are more entities to load.
 
-**[boolean|required]** When true, `onLoadMore()` will not be executed on scroll.
+### `isLoading: boolean`
 
-### onLoadMore
+**Required**
 
-**[function|required]** Called when the user has scrolled all the way to the end. This happens when the `sentinel` has reached the `threshold`.
+When `true`, `onLoadMore()` will not be executed on scroll.
 
-### threshold
+### `onLoadMore: () => void`
 
-**[number|default:100]** Scroll threshold. Number of pixels before the `sentinel` reaches the viewport to trigger `onLoadMore()`.
+**Required**
 
-### throttle
+Called when the user has scrolled all the way to the end. This happens when the `sentinel` has reached the `threshold`.
 
-**[number|default:64]** Scroll handler will be executed at most once per the number of milliseconds specified.
+### `threshold?: number`
+
+Scroll threshold. Number of pixels before the `sentinel` reaches the viewport to trigger `onLoadMore()`.
+
+### `throttle?: number = 64`
+
+Defaults to `64`. Scroll handler will be executed at most once per the number of milliseconds specified.
 
 **Warning:** Making this number closer to zero can decrease performance due to a force reflow caused by `getBoundingClientRect()`, see more properties that can cause this issue in [this gist by Paul Irish](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
 
-### render
+### `render?: (props: ScrollProps) => React.ReactNode`
 
-**[function|optional]** Callback used for convenient inline rendering and wrapping. Arguments passed `Object: { sentinel, children }`. Use this if you have a more complex layout where the `sentinel` needs to be injected.
+Callback used for convenient inline rendering and wrapping. Arguments passed `Object: { sentinel, children }`. Use this if you have a more complex layout where the `sentinel` needs to be injected.
 
 **Warning:** The `sentinel` must be rendered (injected into the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
 
-### component
+### `component?: React.ComponentType<ScrollProps>`
 
-**[component|optional]** React component. Similar to the `render()` prop, this component will receive `Object: { sentinel, children }` as props. **Note** that `render()` prop has precedence over this property, meaning that if both are present, `component` will not be rendered.
+React component. Similar to the `render()` prop, this component will receive `Object: { sentinel, children }` as props. **Note** that `render()` prop has precedence over this property, meaning that if both are present, `component` will not be rendered.
 
 **Warning:** The `sentinel` must be rendered (injected into the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
 
