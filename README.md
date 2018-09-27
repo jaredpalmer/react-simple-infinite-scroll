@@ -10,7 +10,13 @@ npm install react-simple-infinite-scroll --save
 
 ## Usage
 
-### Basic
+This component uses a "sentinel" `div` (with a React ref) that calls `getBoundingClientRect()` to measure its position and fire off a callback when it becomes visible again. Note: this package eventually becomes somewhat inefficient on very very very large lists because it keeps adding nodes to the DOM. However, this package is extremely valuable for situations when a windowing technique is not possible and when a user is going to realistically scroll a few hundred rows (and _not_ thousands of rows). 
+
+### Why not use windowing (`react-virtualized`)?
+
+If you can, you probably should. However, windowing only works when you know the total number of items in the result set ahead of time. This isn't always possible. For example, let's say you have a MongoDB database where you cannot efficiently return the total number of documents in a given query. All your API returns is a cursor (so you can know is if there is another page or not). While this would prevent you from using windowing/`react-virtualized`, `react-simple-infinite-scroll` will work just fine.
+
+### The Gist
 
 ```jsx
 <InfiniteScroll
@@ -20,7 +26,7 @@ npm install react-simple-infinite-scroll --save
   hasMore={!!this.state.cursor}
   onLoadMore={this.loadMore}
 >
-  {this.state.entities}
+  {this.state.myArrayOfItems.map(item => <div>{/* ... */}</div>)}
 </InfiniteScroll>
 ```
 
@@ -33,7 +39,7 @@ npm install react-simple-infinite-scroll --save
   onLoadMore={this.loadMore}
   render={({ sentinel }) => (
     <section>
-      {this.state.entities}
+      {this.state.myArrayOfItems.map(item => <div>{/* ... */}</div>)}
       {sentinel}
     </section>
   )}
@@ -123,41 +129,54 @@ export class MyInfiniteScrollExample extends React.Component {
 }
 ```
 
-## Props / Options
 
-### hasMore
+## API Reference 
 
-**[boolean|required]** Specifies if there are more entities to load.
+### Props
 
-### isLoading
+#### `hasMore: boolean`
 
-**[boolean|required]** When true, `onLoadMore()` will not be executed on scroll.
+**Required**
 
-### onLoadMore
+Specifies if there are more entities to load.
 
-**[function|required]** Called when the user has scrolled all the way to the end. This happens when the `sentinel` has reached the `threshold`.
+#### `isLoading: boolean`
 
-### threshold
+**Required**
 
-**[number|default:100]** Scroll threshold. Number of pixels before the `sentinel` reaches the viewport to trigger `onLoadMore()`.
+When `true`, `onLoadMore()` will not be executed on scroll.
 
-### throttle
+#### `onLoadMore: () => void`
 
-**[number|default:64]** Scroll handler will be executed at most once per the number of milliseconds specified.
+**Required**
+
+Called when the user has scrolled all the way to the end. This happens when the `sentinel` has reached the `threshold`.
+
+#### `threshold?: number`
+
+Scroll threshold. Number of pixels before the `sentinel` reaches the viewport to trigger `onLoadMore()`.
+
+#### `throttle?: number = 64`
+
+Defaults to `64`. Scroll handler will be executed at most once per the number of milliseconds specified.
 
 **Warning:** Making this number closer to zero can decrease performance due to a force reflow caused by `getBoundingClientRect()`, see more properties that can cause this issue in [this gist by Paul Irish](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
 
-### render
+#### `render?: (props: ScrollProps) => React.ReactNode`
 
-**[function|optional]** Callback used for convenient inline rendering and wrapping. Arguments passed `Object: { sentinel, children }`. Use this if you have a more complex layout where the `sentinel` needs to be injected.
+Callback used for convenient inline rendering and wrapping. Arguments passed `Object: { sentinel, children }`. Use this if you have a more complex layout where the `sentinel` needs to be injected.
+
+**Warning:** The `sentinel` must be rendered (injected into the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
+
+#### `component?: React.ComponentType<ScrollProps>`
+
+React component. Similar to the `render()` prop, this component will receive `Object: { sentinel, children }` as props. **Note** that `render()` prop has precedence over this property, meaning that if both are present, `component` will not be rendered.
 
 **Warning:** The `sentinel` must be rendered (injected into the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
 
-### component
+## Alternatives
 
-**[component|optional]** React component. Similar to the `render()` prop, this component will receive `Object: { sentinel, children }` as props. **Note** that `render()` prop has precedence over this property, meaning that if both are present, `component` will not be rendered.
-
-**Warning:** The `sentinel` must be rendered (injected into the DOM) in order for this library to work properly, failing to do so will result in errors and unexpected side effects.
+- [`brigade/react-waypoint`](https://github.com/brigade/react-waypoint)
 
 ## Author
 
