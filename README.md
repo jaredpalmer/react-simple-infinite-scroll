@@ -116,7 +116,7 @@ export class MyInfiniteScrollExample extends React.Component {
         >
           {this.state.items.length > 0
             ? this.state.items.map(item => (
-                <MysListItem key={item.id} title={item.title} />
+                <MyListItem key={item.id} title={item.title} />
               ))
             : null}
         </InfiniteScroll>
