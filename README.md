@@ -72,7 +72,7 @@ const ConnectedComponent = connect(/* ... */)(MyComponent);
 
 ```jsx
 import React from 'react'
-import InfiniteScroll from 'react-simple-infinite-scroll'
+import { InfiniteScroll } from 'react-simple-infinite-scroll'
 
 export class MyInfiniteScrollExample extends React.Component {
   state = {
