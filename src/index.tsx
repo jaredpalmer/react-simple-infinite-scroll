@@ -63,6 +63,11 @@ export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
     window.removeEventListener('scroll', this.scrollHandler);
     window.removeEventListener('resize', this.resizeHandler);
   }
+  
+  componentDidUpdate() {
+    // This fixes edge case where initial content is not enough to enable scrolling on a large screen.
+    this.checkWindowScroll();
+  }
 
   checkWindowScroll = () => {
     if (this.props.isLoading) {
