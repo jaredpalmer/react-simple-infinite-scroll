@@ -26,9 +26,7 @@
     "build": "npm run clean && tsc --project tsconfig.json -m es6 --outDir es6 && webpack -p --config ./webpack.lib && webpack -p --config webpack.umd.js",
     "prepublish": "npm run build"
   },
-  "dependencies": {
-    "lodash.throttle": "^4.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^19.2.3",
     "@types/react": "^16.4.18",

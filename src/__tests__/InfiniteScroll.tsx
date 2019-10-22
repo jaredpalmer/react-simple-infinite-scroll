@@ -3,6 +3,10 @@ import * as renderer from 'react-test-renderer';
 
 import { InfiniteScroll } from '../.';
 
+window.IntersectionObserver = jest.fn(function() {
+  this.observe = jest.fn();
+});
+
 describe('<InfiniteScroll />', () => {
 
   it('renders InfiniteScroll correctly', () => {

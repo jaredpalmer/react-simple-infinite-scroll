@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-const throttle = require('lodash.throttle');
-
 export interface InfiniteScrollProps {
   /**
    * Does the resource have more entities
@@ -48,52 +46,54 @@ export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
     throttle: 64,
   };
   private sentinel: HTMLDivElement;
-  private scrollHandler: () => void;
-  private resizeHandler: () => void;
+  private observer: IntersectionObserver;
 
   componentDidMount() {
-    this.scrollHandler = throttle(this.checkWindowScroll, this.props.throttle);
-    this.resizeHandler = throttle(this.checkWindowScroll, this.props.throttle);
-
-    window.addEventListener('scroll', this.scrollHandler);
-    window.addEventListener('resize', this.resizeHandler);
+    this.observer = new IntersectionObserver(this.loadMore, {rootMargin: `${this.props.threshold}px`, threshold: 0});
+    window.addEventListener('scroll', this.startObservingSentinel, {once: true});
+    window.addEventListener('resize', this.startObservingSentinel, {once: true});
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.scrollHandler);
-    window.removeEventListener('resize', this.resizeHandler);
-  }
-  
-  componentDidUpdate() {
-    // This fixes edge case where initial content is not enough to enable scrolling on a large screen.
-    this.checkWindowScroll();
+    this.observer.disconnect();
   }
 
-  checkWindowScroll = () => {
+  startObservingSentinel = () => {
+    this.observer.observe(this.sentinel);
+
+    window.removeEventListener('scroll', this.startObservingSentinel);
+    window.removeEventListener('resize', this.startObservingSentinel);
+  }
+
+  loadMore = (entries: IntersectionObserverEntry[]) => {
+    const onlyEntryWeAreWatching = entries[0];
+
+    if (!this.props.hasMore) {
+      return;
+    }
+
     if (this.props.isLoading) {
       return;
     }
 
-    if (
-      this.props.hasMore &&
-      this.sentinel.getBoundingClientRect().top - window.innerHeight <
-      this.props.threshold!
-    ) {
-      this.props.onLoadMore();
+    if (!onlyEntryWeAreWatching.isIntersecting) {
+      return;
     }
+
+    this.props.onLoadMore();
   }
 
   render() {
     const sentinel = <div ref={i => this.sentinel = i} />;
 
-    if(this.props.render) {
+    if (this.props.render) {
       return this.props.render({
         sentinel,
         children: this.props.children
       });
     }
 
-    if(this.props.component) {
+    if (this.props.component) {
       const Container = this.props.component;
       return (
         <Container sentinel={sentinel}>
